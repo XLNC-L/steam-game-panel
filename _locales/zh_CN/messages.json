@@ -1,0 +1,4 @@
+{
+  "extName": { "message": "Steam 游戏口碑与史低" },
+  "extDesc": { "message": "为 Steam 商店页补充小黑盒评分、Steam 全语言好评率、实时在线人数、国区史低价格与中文类型标签。聚合小黑盒、Steam 官方与 IsThereAnyDeal 三个数据源，国内直连，无需代理。" }
+}

@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="utf-8">
+<style>
+  * { box-sizing: border-box; }
+  body {
+    margin: 0; width: 320px;
+    background: #1b2838; color: #c6d4df;
+    font: 13px "Motiva Sans", Arial, sans-serif;
+  }
+  .head {
+    display: flex; align-items: center; gap: 8px;
+    padding: 11px 14px; color: #66c0f4; font-weight: 600; font-size: 12px;
+    background: rgba(102,192,244,.09);
+    border-bottom: 1px solid rgba(102,192,244,.15);
+    letter-spacing: .5px;
+  }
+  .body { padding: 12px 14px; }
+  .field { margin-bottom: 12px; }
+  label {
+    display: block; font-size: 11px; color: #7c8b99;
+    margin-bottom: 4px;
+  }
+  input[type=text] {
+    width: 100%; padding: 6px 8px; font-size: 12px;
+    background: rgba(0,0,0,.3); color: #c6d4df;
+    border: 1px solid rgba(102,192,244,.25); border-radius: 3px;
+    font-family: Consolas, monospace;
+  }
+  input[type=text]:focus {
+    outline: none; border-color: rgba(102,192,244,.6);
+    background: rgba(0,0,0,.45);
+  }
+  .hint {
+    font-size: 10px; color: #6e7a86; margin-top: 4px; line-height: 1.5;
+  }
+  .hint a { color: #66c0f4; text-decoration: none; }
+  .hint a:hover { text-decoration: underline; }
+  .row { display: flex; gap: 8px; margin-top: 14px; }
+  button {
+    flex: 1; padding: 7px; font-size: 12px; cursor: pointer;
+    background: rgba(102,192,244,.15); color: #66c0f4;
+    border: 1px solid rgba(102,192,244,.3); border-radius: 3px;
+  }
+  button:hover { background: rgba(102,192,244,.28); }
+  button:disabled { opacity: .5; cursor: default; }
+  .status {
+    margin-top: 10px; font-size: 11px; min-height: 15px;
+    text-align: center;
+  }
+  .status.ok { color: #5ba85b; }
+  .status.err { color: #cd6b5e; }
+  .sep {
+    height: 1px; background: rgba(102,192,244,.12);
+    margin: 14px 0 12px;
+  }
+  .info { font-size: 11px; color: #6e7a86; line-height: 1.7; }
+  .info b { color: #8f98a0; font-weight: 500; }
+</style>
+</head>
+<body>
+  <div class="head">Steam 游戏口碑与史低</div>
+  <div class="body">
+    <div class="field">
+      <label>ITAD API Key（用于国区史低价格）</label>
+      <input type="text" id="key" placeholder="粘贴 IsThereAnyDeal API Key" spellcheck="false">
+      <div class="hint">
+        在 <a href="https://isthereanydeal.com/apps/" target="_blank">isthereanydeal.com/apps</a>
+        创建应用后，于「API Keys」区域获取。未填则史低一栏显示 —。
+      </div>
+    </div>
+
+    <div class="row">
+      <button id="save">保存</button>
+      <button id="clear">清空缓存</button>
+    </div>
+    <div class="status" id="status"></div>
+
+    <div class="sep"></div>
+    <div class="info">
+      <div><b>数据源</b>　小黑盒 · Steam 官方 · ITAD</div>
+      <div><b>代理</b>　全部国内直连，无需 VPN</div>
+      <div><b>缓存</b>　10 分钟（appid 映射 7 天）</div>
+      <div><b>生效</b>　Steam 商店页 /app/ 页面</div>
+    </div>
+  </div>
+<script src="popup.js"></script>
+</body>
+</html>

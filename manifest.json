@@ -1,0 +1,54 @@
+{
+  "manifest_version": 3,
+  "name": "Steam 游戏口碑与史低",
+  "version": "1.1.0",
+  "description": "为 Steam 商店页补充小黑盒评分、Steam 全语言好评率、实时在线人数、国区史低价格与中文类型标签。聚合小黑盒、Steam 官方与 IsThereAnyDeal 三个数据源，国内直连，无需代理。",
+  "default_locale": "zh_CN",
+  "icons": {
+    "16": "icons/icon16.png",
+    "48": "icons/icon48.png",
+    "128": "icons/icon128.png"
+  },
+  "action": {
+    "default_title": "Steam 游戏口碑与史低",
+    "default_icon": {
+      "16": "icons/icon16.png",
+      "48": "icons/icon48.png",
+      "128": "icons/icon128.png"
+    },
+    "default_popup": "popup.html"
+  },
+  "background": {
+    "service_worker": "background.js"
+  },
+  "content_scripts": [
+    {
+      "run_at": "document_start",
+      "js": [
+        "content-bridge.js"
+      ],
+      "matches": [
+        "https://store.steampowered.com/app/*"
+      ]
+    },
+    {
+      "run_at": "document_end",
+      "js": [
+        "content-main.js"
+      ],
+      "matches": [
+        "https://store.steampowered.com/app/*"
+      ]
+    }
+  ],
+  "permissions": [
+    "storage"
+  ],
+  "host_permissions": [
+    "*://api.xiaoheihe.cn/*",
+    "*://api.steampowered.com/*",
+    "*://store.steampowered.com/*",
+    "*://api.isthereanydeal.com/*"
+  ],
+  "key": "MIIBIjANBgkqhkiG9w0BAQEFAAOCAQ8AMIIBCgKCAQEA6gSGc24rnhnrOxcDIuBzdaKWIFXD712GB0gBDqpuBzihZbiIB7tSK7FCzLdqCn18JeAgqC3OtHTMW7CYvmpV/p5JLICwWtSWK2FqzfFI7rb8Pstv6TBMfgiZU6uJxAaNJbZE/EKC/X6w4XaLNfoQZvKI9r5rhuzDHmh6lxa5IwFWmvEJ6TiVaKK2oWutZ0Nl9y5hvMe7uOnDVO1f+cqvfOBpVCT6J2CS6ACUNoAp7I2MSvmjfKHWcAeQ89LUsTazWyEOrycgqt+LXuEf8McBcGaeSMMM55PF5ZO32nyeihSQBozoF5hVnq19aIsDh+Z38fbiZzaFFhSl+bx0pI38CQIDAQAB"
+}

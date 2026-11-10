@@ -1,0 +1,13 @@
+# dependencies
+node_modules/
+
+# sensitive
+extension-keys.json
+
+# OS
+.DS_Store
+Thumbs.db
+
+# IDE
+.vscode/
+.idea/
