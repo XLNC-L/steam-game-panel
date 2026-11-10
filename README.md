@@ -97,8 +97,36 @@ steam-game-panel/
 ├── popup.html/js          扩展弹窗（API Key 配置）
 ├── _locales/zh_CN/        中文语言包
 ├── icons/                 图标 16/48/128
-└── images/panel-demo.png  示例图
+├── images/panel-demo.png  示例图
+└── patches/
+    └── fix_plugin_errors.py  Millennium 插件空值崩溃补丁
 ```
+
+## patches/fix_plugin_errors.py
+
+修复部分 Millennium 插件在 Steam CEF 中抛出的未捕获异常。这些插件来自第三方仓库，
+在 Steam 的 Chromium 环境下会遇到两类问题：
+
+- **回调参数为空**：`RegisterForDownloadOverview` 等接口在某些状态下回调不带参数
+- **集合接口返回空值**：`appStore.allApps.find()` 未命中、`GetAppDetails()` 未就绪、
+  `collectionStore.GetCollection()` 返回 undefined、`item_data[0]` 越界
+
+受影响的插件与症状：
+
+| 插件 | 症状 |
+|---|---|
+| steam-librarian | `TypeError: e.querySelectorAll is not a function` |
+| steam-librarian | `TypeError: Cannot read properties of undefined (reading 'appid')` |
+| steam-taskbar-progress | `TypeError: Cannot read properties of undefined (reading 'appid')` |
+
+运行方式（需要先关闭 Steam）：
+
+```powershell
+python patches/fix_plugin_errors.py
+```
+
+脚本会自动备份原文件（`.bak-<时间戳>`），做精确字符串替换，并用 `node --check`
+校验每个改后文件的语法。重复运行是幂等的。
 
 ## 免责声明
 
